@@ -1,0 +1,7 @@
+把instrument.c加进编译依赖，这样其中的函数可以在main函数前打开文件，main后关闭文件，在每个函数调用的时候记录函数地址，入口用E开头，出口用X开头，记录在trace.txt中，然后运行一下程序生成trace.txt，然后用pvtrace跑一下生成的程序，这样生成了一个dot文件，再画成图就可以看到调用关系了
+下面是个坑爹的例子
+gcc -g -finstrument-functions hello.c instrument.c -o hello
+./hello
+ls
+pvtrace hello
+dot graph.dot -Tpng graph.png
